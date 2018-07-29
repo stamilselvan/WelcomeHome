@@ -9,22 +9,18 @@ while True:
 	ipAddress = m.group(1)
 
 	ipAndSlash = ipAddress + "/24"
-	print(ipAndSlash)
 
 	nMapOut = subprocess.run(['sudo', 'nmap', '-sn', ipAndSlash], stdout=subprocess.PIPE)
 	nMapOutStr = nMapOut.stdout.decode('utf-8')
 	matchAll = re.findall('Host is up ', nMapOutStr)
 	count = len(matchAll)
-	print(count)
 	
 	if count == 3:
 		break
 
 	if count == 2:
-		break
 		time.sleep(2) 
 	if count == 1:
-		time.sleep(2) 
-		print("sleep")
+		time.sleep(60) 
 
 subprocess.run(['play', 'music.mp3'], stdout=subprocess.PIPE)
